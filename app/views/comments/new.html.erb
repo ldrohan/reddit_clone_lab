@@ -1,0 +1,6 @@
+<h1>Add your comment to "<%=@post.title%>"</h1>
+
+<%= form_for([@post, @comment]) do |f| %>
+  <%= f.text_area :title, placeholder: "Leave a dumb comment" %>
+  <%= f.submit %>
+<% end %>

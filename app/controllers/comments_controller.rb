@@ -1,11 +1,8 @@
 class CommentsController < ApplicationController
-	before_filter :load_posts
+	before_filter :load_post
   def index
-    @comments = @posts.commments.all.order(:title)
-  end
-
-  def show
-    @comment = @post.comments.find(params[:id])
+    @comments = @post.comments.all
+		@user = current_user
   end
 
   def new
@@ -15,21 +12,23 @@ class CommentsController < ApplicationController
   def create
     @comment = @post.comments.new(comment_params)
     if @comment.save
-      redirect_to auction_bids_path(@post)
-    else
-      render 'new'
+      redirect_to post_comments_path(@post)
     end
   end
+
+  # def show
+  #   @comment = @post.comments.find(params[:id])
+  # end
 
   def destroy
     @comment = @post.comments.find(params[:id])
     @comment.destroy
-    redirect_to auction_bids_path(@post)
+    redirect_to post_comments_path(@post)
   end
 
   private
   def comment_params
-    params.require(:comment).permit(:title, :post_id)
+    params[:comment].permit(:title)
   end
 
   def load_post

@@ -1,6 +1,7 @@
 class PostsController < ApplicationController
 	def index
     @posts = Post.all
+    @user = current_user
   end
 
   def new
@@ -15,6 +16,6 @@ class PostsController < ApplicationController
 
   private
   def post_params
-    params.require[:post].permit(:title, :body, :comments_attributes=>[:title])
+    params[:post].permit(:title, :body, :comments_attributes=>[:title])
   end
 end
