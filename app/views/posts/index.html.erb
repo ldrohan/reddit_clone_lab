@@ -1,0 +1,8 @@
+<h1>NOTREDITT</h1>
+<p>Take a Look at this crap:</p>
+
+<% @posts.each do |post| %>
+  <li><%= link_to post.title, post_comments_path(post)%></li>
+<% end %>
+
+<%= link_to "Create New Dumb Reddit", new_post_path %>
